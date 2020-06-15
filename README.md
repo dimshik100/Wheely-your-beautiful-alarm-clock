@@ -44,6 +44,10 @@ See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
 
 Follow the [instructions](https://quasar.dev/quasar-cli/developing-capacitor-apps/preparation) to prepare all the needed IDE's and environments
 
+### For IOS we need some more tooling
+
+follow this [instructions](https://guides.cocoapods.org/using/getting-started)html#installation
+
 ### Installations
 
 1. install android studio:
