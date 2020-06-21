@@ -9,3 +9,9 @@ export default {
   name: 'App'
 }
 </script>
+
+<style scoped>
+  #q-app{
+      background-color: #33324d;
+  }
+</style>
