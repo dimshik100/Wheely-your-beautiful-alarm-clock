@@ -1,7 +1,7 @@
 <template>
     <div>
        <div v-bind:key = "time.id" v-for = "time in times">
-            <div class="container">
+            <div class="container Rectangle-3">
                 <div class="left">
                     <div class="-AM">{{time.hour}}</div>
                     <div class="text">{{time.text}}</div>
@@ -59,8 +59,14 @@ export default {
    flex-direction: row;
 }
 .right{
-     width: 56px;
-        height: 32px;
-        border-radius: 93.8px;
+    position: relative;
+    top: 14px;
+    left: 170px;
+}
+.Rectangle-3 {
+  width: 375px;
+  height: 77.2px;
+  border: solid 1.5px rgba(0, 0, 0, 0.16);
+  background-color: rgba(216, 216, 216, 0);
 }
 </style>
