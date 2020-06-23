@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .alert-style {
   width: 120px;
   height: 30px;

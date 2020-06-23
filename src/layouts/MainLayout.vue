@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
   .wheely {
     width: 85.8px;
     height: 20px;
@@ -61,7 +61,7 @@ export default {
     line-height: normal;
     letter-spacing: 0.8px;
     text-align: center;
-    color: #ffffff;
+    color: $white;
   }
 
 </style>
