@@ -1,15 +1,16 @@
 <template>
     <div>
-       <div v-bind:key = "time.id" v-for = "time in times">
+       <div v-bind:key = "alert.id" v-for = "alert in alerts">
             <div class="flex justify-between rectangle">
-            <div>
-              <div class="alert-style">{{time.hour}}</div>
-              <div class="text-alert-style">{{time.text}}</div>
-            </div>
-              <q-toggle
-                v-model="value"
-                color="grey"
-              />
+              <div>
+                <div class="alert-style">{{alert.hour}}</div>
+                <div class="text-alert-style">{{alert.text}}</div>
+              </div>
+                <q-toggle
+                  color="white"
+                  dark
+                  v-model="toggle"
+                />
             </div>
        </div>
     </div>
@@ -17,11 +18,11 @@
 
 <script>
 export default {
-  name: 'Hours',
-  props: ['times'],
+  name: 'AlertsList',
+  props: ['alerts'],
   data () {
     return {
-      value: true
+      toggle: true
     }
   }
 }

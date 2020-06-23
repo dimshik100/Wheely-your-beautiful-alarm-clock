@@ -22,23 +22,23 @@
   </q-header>
 
     <q-page-container>
-    <Hours v-bind:times = "times"/>
+    <AlertsList v-bind:alerts = "alerts"/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import Hours from '../components/Hours'
+import AlertsList from '../components/AlertsList'
 export default {
   name: 'MainLayout',
 
   components: {
-    Hours
+    AlertsList
   },
 
   data () {
     return {
-      times: [
+      alerts: [
         {
           id: 1,
           hour: '13:30 PM',
