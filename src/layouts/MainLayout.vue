@@ -1,24 +1,13 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="shadow-2">
-    <div class="toolBar">
       <q-toolbar>
-      <!--
-       <q-btn flat round dense icon="create" />
-        <q-space />
-        <div class="text-white">
-        Wheely
-        </div>
-        <q-space />
-        <q-btn flat round dense icon="add_alert" />
-        -->
-        <div class="Edit">Edit</div>
-        <q-space />
-        <div class="Wheely">Wheely</div>
-        <q-space />
-        <div class="Add">+Add</div>
+          <q-btn flat color="red" label="Edit" icon="create"/>
+          <q-space />
+          <div class="wheely">Wheely</div>
+          <q-space />
+          <q-btn flat color="red" label="+Add" icon="add_alert"/>
       </q-toolbar>
-    </div>
   </q-header>
 
     <q-page-container>
@@ -61,22 +50,10 @@ export default {
 </script>
 
 <style>
-  .Edit {
-    width: 32px;
-    height: 20px;
-    font-family: CircularStd;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: 0.8px;
-    color: #ff5959;
-  }
-  .Wheely {
+  .wheely {
     width: 85.8px;
     height: 20px;
-    font-family: CircularStd;
+    font-family: Roboto, Helvetica, sans-serif;
     font-size: 16px;
     font-weight: bold;
     font-stretch: normal;
@@ -85,18 +62,6 @@ export default {
     letter-spacing: 0.8px;
     text-align: center;
     color: #ffffff;
-  }
-  .Add {
-    width: 47px;
-    height: 20px;
-    font-family: CircularStd;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: 0.8px;
-    color: #ff5959;
   }
 
 </style>
