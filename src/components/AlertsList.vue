@@ -32,7 +32,7 @@ export default {
 .alert-style {
   width: 120px;
   height: 30px;
-  font-family: CircularStd;
+  font-family: Roboto, Helvetica, sans-serif;
   font-size: 24px;
   font-weight: bold;
   font-stretch: normal;
@@ -44,7 +44,7 @@ export default {
 .text-alert-style {
   width: 39px;
   height: 20px;
-  font-family: CircularStd;
+  font-family: Roboto, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
