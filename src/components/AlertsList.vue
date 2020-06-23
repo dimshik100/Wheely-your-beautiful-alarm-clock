@@ -51,11 +51,11 @@ export default {
   font-style: normal;
   line-height: normal;
   letter-spacing: 0.8px;
-  color: #d2d2d2;
+  color: $white;
 }
 .rectangle {
   height: 77.2px;
   border: solid 1.5px rgba(0, 0, 0, 0.16);
-  background-color: rgba(216, 216, 216, 0);
+  background-color: $primary;
 }
 </style>
