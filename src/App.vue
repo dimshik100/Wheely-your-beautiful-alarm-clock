@@ -10,8 +10,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   #q-app{
-      background-color: #33324d;
+      background-color: $primary;
   }
 </style>
