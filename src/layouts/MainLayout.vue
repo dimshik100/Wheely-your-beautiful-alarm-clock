@@ -41,17 +41,17 @@ export default {
       times: [
         {
           id: 1,
-          hour: '13:30',
+          hour: '13:30 PM',
           text: 'once'
         },
         {
           id: 2,
-          hour: '14:30',
+          hour: '14:30 PM',
           text: 'mon'
         },
         {
           id: 3,
-          hour: '16:50',
+          hour: '16:50 PM',
           text: 'weekends'
         }
       ]
