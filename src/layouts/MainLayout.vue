@@ -2,11 +2,11 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="shadow-2">
       <q-toolbar>
-          <q-btn flat color="red" label="Edit" icon="create"/>
+          <q-btn no-caps flat color="secondary" label="Edit" icon="create"/>
           <q-space />
           <div class="wheely">Wheely</div>
           <q-space />
-          <q-btn flat color="red" label="+Add" icon="add_alert"/>
+          <q-btn no-caps flat color="secondary" label="+Add" icon="add_alert"/>
       </q-toolbar>
   </q-header>
 
