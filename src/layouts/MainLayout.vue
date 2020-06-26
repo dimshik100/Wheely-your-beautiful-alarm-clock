@@ -4,7 +4,7 @@
       <q-toolbar>
           <q-btn no-caps flat color="secondary" label="Edit" icon="create"/>
           <q-space />
-          <div class="wheely">Wheely</div>
+          <div class="header-title">Wheely</div>
           <q-space />
           <q-btn no-caps flat color="secondary" label="+Add" icon="add_alert"/>
       </q-toolbar>
@@ -50,9 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .wheely {
-    width: 85.8px;
-    height: 20px;
+  .header-title {
     font-family: Roboto, Helvetica, sans-serif;
     font-size: 16px;
     font-weight: bold;
