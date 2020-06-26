@@ -3,8 +3,8 @@
        <div v-bind:key = "alert.id" v-for = "alert in alerts">
             <div class="flex justify-between rectangle">
               <div>
-                <div class="alert-style">{{alert.hour}}</div>
-                <div class="text-alert-style">{{alert.text}}</div>
+                <div class="alert-time">{{alert.time}}</div>
+                <div class="alert-occurrence">{{alert.occurrence}}</div>
               </div>
                 <q-toggle
                   color="white"
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.alert-style {
+.alert-time {
   width: 120px;
   height: 30px;
   font-family: Roboto, Helvetica, sans-serif;
@@ -41,7 +41,7 @@ export default {
   letter-spacing: 1.2px;
   color: #7284fc;
 }
-.text-alert-style {
+.alert-occurrence {
   width: 39px;
   height: 20px;
   font-family: Roboto, Helvetica, sans-serif;

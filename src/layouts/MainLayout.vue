@@ -30,18 +30,18 @@ export default {
       alerts: [
         {
           id: 1,
-          hour: '13:30 PM',
-          text: 'once'
+          time: '13:30 PM',
+          occurrence: 'once'
         },
         {
           id: 2,
-          hour: '14:30 PM',
-          text: 'mon'
+          time: '14:30 PM',
+          occurrence: 'mon'
         },
         {
           id: 3,
-          hour: '16:50 PM',
-          text: 'weekends'
+          time: '16:50 PM',
+          occurrence: 'weekends'
         }
       ]
     }
