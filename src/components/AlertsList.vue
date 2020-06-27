@@ -36,7 +36,6 @@ export default {
 
 <style lang="scss" scoped>
 .alert-time {
-  width: 120px;
   height: 30px;
   font-family: Roboto, Helvetica, sans-serif;
   font-size: 24px;
@@ -48,8 +47,7 @@ export default {
   color: #7284fc;
 }
 .alert-occurrence {
-  width: 39px;
-  height: 20px;
+  height: 10px;
   font-family: Roboto, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: normal;
