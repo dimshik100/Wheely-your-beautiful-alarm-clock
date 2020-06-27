@@ -1,6 +1,6 @@
 <template>
  <div>
-    <q-list bordered separator v-bind:key = "alert.id" v-for = "alert in alerts" class="flex justify-between rectangle">
+    <q-list bordered separator v-bind:key = "alert.id" v-for = "alert in alerts" class="flex justify-between alarm-item">
         <div>
           <q-item>
             <q-item-section class="alert-time">{{alert.time}}</q-item-section>
@@ -59,7 +59,7 @@ export default {
   letter-spacing: 0.8px;
   color: $white;
 }
-.rectangle {
+.alarm-item {
   height: 77.2px;
   border: solid 1.5px rgba(0, 0, 0, 0.16);
 }
