@@ -40,20 +40,12 @@ export default {
   font-family: Roboto, Helvetica, sans-serif;
   font-size: 24px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: 1.2px;
   color: #7284fc;
 }
 .alert-occurrence {
   height: 10px;
   font-family: Roboto, Helvetica, sans-serif;
   font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
   letter-spacing: 0.8px;
   color: $white;
 }
