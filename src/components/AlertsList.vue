@@ -1,18 +1,24 @@
 <template>
-    <div>
-       <div v-bind:key = "alert.id" v-for = "alert in alerts">
-            <div class="flex justify-between rectangle">
-              <div>
-                <div class="alert-time">{{alert.time}}</div>
-                <div class="alert-occurrence">{{alert.occurrence}}</div>
-              </div>
-                <q-toggle
-                  color="white"
-                  dark
-                  v-model="toggle"
-                />
-            </div>
-       </div>
+ <div>
+    <q-list bordered separator v-bind:key = "alert.id" v-for = "alert in alerts" class="flex justify-between rectangle">
+        <div>
+          <q-item>
+            <q-item-section class="alert-time">{{alert.time}}</q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section class="alert-occurrence">{{alert.occurrence}}</q-item-section>
+          </q-item>
+        </div>
+        <q-item>
+          <q-item-section>
+            <q-toggle
+              color="white"
+              dark
+              v-model="toggle"
+            />
+          </q-item-section>
+        </q-item>
+    </q-list>
     </div>
 </template>
 
@@ -56,6 +62,5 @@ export default {
 .rectangle {
   height: 77.2px;
   border: solid 1.5px rgba(0, 0, 0, 0.16);
-  background-color: $primary;
 }
 </style>
