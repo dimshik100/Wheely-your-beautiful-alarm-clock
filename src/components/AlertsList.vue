@@ -1,23 +1,15 @@
 <template>
  <div>
-    <q-list bordered separator v-bind:key = "alert.id" v-for = "alert in alerts" class="flex justify-between alarm-item">
-        <div>
-          <q-item>
-            <q-item-section class="alert-time">{{alert.time}}</q-item-section>
+    <q-list separator>
+          <q-item v-bind:key="alert.id" v-for="alert in alerts" class="alarm-item">
+            <q-item-section>
+              <q-item-label class="alert-time">{{alert.time}}</q-item-label>
+              <q-item-label class="alert-occurrence" caption>{{alert.occurrence}}</q-item-label>
+            </q-item-section>
+            <q-item-section side center>
+              <q-toggle color="white" v-model="toggle" />
+            </q-item-section>
           </q-item>
-          <q-item>
-            <q-item-section class="alert-occurrence">{{alert.occurrence}}</q-item-section>
-          </q-item>
-        </div>
-        <q-item>
-          <q-item-section>
-            <q-toggle
-              color="white"
-              dark
-              v-model="toggle"
-            />
-          </q-item-section>
-        </q-item>
     </q-list>
     </div>
 </template>
@@ -36,21 +28,25 @@ export default {
 
 <style lang="scss" scoped>
 .alert-time {
-  height: 30px;
   font-family: Roboto, Helvetica, sans-serif;
   font-size: 24px;
+  letter-spacing: 1.2px;
   font-weight: bold;
   color: #7284fc;
 }
 .alert-occurrence {
-  height: 10px;
   font-family: Roboto, Helvetica, sans-serif;
   font-size: 16px;
   letter-spacing: 0.8px;
   color: $white;
 }
 .alarm-item {
-  height: 77.2px;
-  border: solid 1.5px rgba(0, 0, 0, 0.16);
+  height: 77px;
+  border-bottom: solid 1.5px rgba(0, 0, 0, 0.16);
 }
+
+.q-list--separator > .q-item-type + .q-item-type {
+  border-top: none;
+}
+
 </style>
