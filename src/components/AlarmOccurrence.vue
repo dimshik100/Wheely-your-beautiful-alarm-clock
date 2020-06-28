@@ -8,6 +8,7 @@ import { format } from 'date-fns'
 import { Repeat } from '../classes/Repeat.js';
 
 export default {
+  name: 'AlarmOccurrence',
   props: {
     repeat: {
       type: Repeat,

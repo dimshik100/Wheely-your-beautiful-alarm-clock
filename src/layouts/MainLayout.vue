@@ -11,71 +11,56 @@
   </q-header>
 
     <q-page-container>
-    <AlertsList v-bind:alerts = "alerts"/>
-      <AlarmOccurrence :repeat="repeatOneDay2" />
-      <br>
-      <br>
-      <!-- <AlarmOccurrence :repeat="repeatWeekend" />
-      <br>
-      <AlarmOccurrence :repeat="repeatWeekdays" />
-      <br>
-      <AlarmOccurrence :repeat="repeatOneDay" />
-      <br>
-      <AlarmOccurrence :repeat="repeatMultipleDays" />
-      <br>
-      <AlarmOccurrence :repeat="once" /> -->
+    <AlarmList :alarms="alarms"/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import AlertsList from '../components/AlertsList'
-import AlarmOccurrence from 'components/AlarmOccurrence.vue'
+import AlarmList from '../components/AlarmList'
 import { Repeat } from '../classes/Repeat.js';
 
 export default {
   name: 'MainLayout',
 
   components: {
-    AlertsList,
-    AlarmOccurrence
+    AlarmList
   },
 
   data () {
     return {
-      alerts: [
+      alarms: [
         {
           id: 1,
           time: '13:30 PM',
-          occurrence: 'once'
+          active: true,
+          occurrence: new Repeat(new Date()) // once
         },
         {
           id: 2,
           time: '14:30 PM',
-          occurrence: 'mon'
+          active: false,
+          occurrence: new Repeat([3]) // repeatOneDay (local days of the week)
         },
         {
           id: 3,
           time: '16:50 PM',
-          occurrence: 'weekends'
+          active: true,
+          occurrence: new Repeat([2, 5]) // repeatMultipleDays
+        },
+        {
+          id: 4,
+          time: '16:50 PM',
+          active: false,
+          occurrence: new Repeat([0, 1, 2, 3, 4]) // repeatWeekdays
+        },
+        {
+          id: 5,
+          time: '16:50 PM',
+          active: true,
+          occurrence: new Repeat([5, 6]) // repeatWeekend
         }
-      ],
-      repeatOneDay2: new Repeat([3]),
-      repeatOneDay: {
-        days: [2] // local days of the week
-      },
-      repeatMultipleDays: {
-        days: [2, 4]
-      },
-      repeatWeekdays: {
-        days: [0, 1, 2, 3, 4]
-      },
-      repeatWeekend: {
-        days: [5, 6]
-      },
-      once: {
-        date: new Date()
-      }
+      ]
     }
   }
 }
