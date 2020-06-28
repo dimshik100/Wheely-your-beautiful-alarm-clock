@@ -55,6 +55,11 @@ module.exports = {
     'arrow-parens': 'off',
     'one-var': 'off',
 
+    // 'comma-dangle': 'off',
+    'semi': 'off',
+    'space-before-function-paren': 'off',
+    'quotes': 'off',
+
     'import/first': 'off',
     'import/named': 'error',
     'import/namespace': 'error',

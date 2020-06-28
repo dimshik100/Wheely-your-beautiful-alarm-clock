@@ -12,17 +12,33 @@
 
     <q-page-container>
     <AlertsList v-bind:alerts = "alerts"/>
+      <AlarmOccurrence :repeat="repeatOneDay2" />
+      <br>
+      <br>
+      <!-- <AlarmOccurrence :repeat="repeatWeekend" />
+      <br>
+      <AlarmOccurrence :repeat="repeatWeekdays" />
+      <br>
+      <AlarmOccurrence :repeat="repeatOneDay" />
+      <br>
+      <AlarmOccurrence :repeat="repeatMultipleDays" />
+      <br>
+      <AlarmOccurrence :repeat="once" /> -->
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
 import AlertsList from '../components/AlertsList'
+import AlarmOccurrence from 'components/AlarmOccurrence.vue'
+import { Repeat } from '../classes/Repeat.js';
+
 export default {
   name: 'MainLayout',
 
   components: {
-    AlertsList
+    AlertsList,
+    AlarmOccurrence
   },
 
   data () {
@@ -43,7 +59,23 @@ export default {
           time: '16:50 PM',
           occurrence: 'weekends'
         }
-      ]
+      ],
+      repeatOneDay2: new Repeat([3]),
+      repeatOneDay: {
+        days: [2] // local days of the week
+      },
+      repeatMultipleDays: {
+        days: [2, 4]
+      },
+      repeatWeekdays: {
+        days: [0, 1, 2, 3, 4]
+      },
+      repeatWeekend: {
+        days: [5, 6]
+      },
+      once: {
+        date: new Date()
+      }
     }
   }
 }
