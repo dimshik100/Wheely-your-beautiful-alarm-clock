@@ -48,9 +48,9 @@ export default {
 
       for (let dayNumber = 0; dayNumber < 7; dayNumber++) {
         if (repeatDays.includes(dayNumber)) {
-          html += `<strong>${weekdaysShortText[dayNumber]}</strong> `;
+          html += `<strong class="selected-day-of-the-week">${weekdaysShortText[dayNumber]}</strong> `;
         } else {
-          html += `${weekdaysShortText[dayNumber]} `;
+          html += `<span class="day-of-the-week">${weekdaysShortText[dayNumber]} </span>`;
         }
       }
 
@@ -60,5 +60,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+::v-deep {
+  .selected-day-of-the-week {
+    color: $secondary;
+  }
+  .day-of-the-week {
+    opacity: 0.3;
+  }
+}
 </style>
