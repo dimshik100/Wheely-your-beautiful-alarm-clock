@@ -2,16 +2,38 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="shadow-2">
       <q-toolbar>
-          <q-btn no-caps flat color="secondary" label="Edit" icon="create"/>
+          <q-btn no-caps flat color="secondary" label="Edit" icon="create" @click="editClick"/>
           <q-space />
           <div class="header-title">Wheely</div>
           <q-space />
-          <q-btn no-caps flat color="secondary" label="+Add" icon="add_alert"/>
+          <q-btn no-caps flat color="secondary" label="+Add" icon="add_alert" @click="createAlarm"/>
       </q-toolbar>
   </q-header>
 
     <q-page-container>
-    <AlarmList :alarms="alarms"/>
+      <AlarmList :editMode="editMode" :alarms="alarms" @deleteAlarm="deleteAlarmClicked" @editAlarm="editAlarmClicked"/>
+
+      <q-dialog
+      v-model="alarmDialog"
+      persistent
+      :maximized="true"
+      transition-show="slide-left"
+      transition-hide="slide-right"
+    >
+      <q-card class="bg-primary text-white">
+
+        <q-card-section>
+          <div class="text-h6">Alarm dialog</div>
+          <q-btn dense flat icon="close" v-close-popup>
+            <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
+          </q-btn>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
+        </q-card-section>
+      </q-card>
+    </q-dialog>
     </q-page-container>
   </q-layout>
 </template>
@@ -22,13 +44,14 @@ import { Repeat } from '../classes/Repeat.js';
 
 export default {
   name: 'MainLayout',
-
   components: {
     AlarmList
   },
-
   data () {
     return {
+      editMode: false,
+      alarmDialog: false,
+      currentAlarm: null,
       alarms: [
         {
           id: 1,
@@ -61,6 +84,41 @@ export default {
           occurrence: new Repeat([5, 6]) // repeatWeekend
         }
       ]
+    }
+  },
+  methods: {
+    editClick() {
+      this.editMode = !this.editMode;
+    },
+    deleteAlarmClicked(alarmId) {
+      console.log("deleteAlarm -> alarmId", alarmId);
+      this.confirmDelete(alarmId);
+    },
+    editAlarmClicked(alarmId) {
+      console.log("editAlarm -> alarmId", alarmId);
+
+      // TODO: set currentAlarm to be according to alarmId
+      this.alarmDialog = true;
+    },
+    createAlarm() {
+      // resetting current alarm
+      this.currentAlarm = null;
+      this.alarmDialog = true;
+    },
+    confirmDelete (alarmId) {
+      this.$q.dialog({
+        title: 'Confirm Deletion',
+        message: 'Are you sure you want to delete this Alarm?', // TODO: maybe show the Alarm details in the message?
+        cancel: true,
+        persistent: true
+      }).onOk(() => {
+        console.log("confirmDelete -> alarmId", alarmId)
+        // TODO: delete the alarm from alarms list
+      }).onCancel(() => {
+        // console.log('>>>> Cancel')
+      }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+      })
     }
   }
 }
