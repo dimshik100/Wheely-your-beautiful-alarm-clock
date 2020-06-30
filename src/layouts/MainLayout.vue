@@ -20,19 +20,7 @@
       transition-show="slide-left"
       transition-hide="slide-right"
     >
-      <q-card class="bg-primary text-white">
-
-        <q-card-section>
-          <div class="text-h6">Alarm dialog</div>
-          <q-btn dense flat icon="close" v-close-popup>
-            <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
-          </q-btn>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
-        </q-card-section>
-      </q-card>
+      <AlarmDialogCard @alarmSet="setAlarm"/>
     </q-dialog>
     </q-page-container>
   </q-layout>
@@ -40,12 +28,14 @@
 
 <script>
 import AlarmList from '../components/AlarmList'
+import AlarmDialogCard from '../components/AlarmDialogCard'
 import { Repeat } from '../classes/Repeat.js';
 
 export default {
   name: 'MainLayout',
   components: {
-    AlarmList
+    AlarmList,
+    AlarmDialogCard
   },
   data () {
     return {
@@ -119,6 +109,9 @@ export default {
       }).onDismiss(() => {
         // console.log('I am triggered on both OK and Cancel')
       })
+    },
+    setAlarm(alarm) {
+      console.log("setAlarm -> alarm", alarm.time);
     }
   }
 }
