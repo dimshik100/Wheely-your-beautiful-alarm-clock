@@ -7,7 +7,7 @@
               <q-btn size="12px" flat dense stack label="Edit" @click="editAlarm(alarm)" icon="edit" />
             </q-item-section>
             <q-item-section>
-              <q-item-label class="alarm-time">{{alarm.time}}</q-item-label>
+              <q-item-label class="alarm-time">{{alarm.hours}}:{{alarm.minutes}} {{alarm.period}}</q-item-label>
               <q-item-label class="alarm-occurrence" lines="1" caption><AlarmOccurrence :repeat="alarm.occurrence"/></q-item-label>
             </q-item-section>
             <q-item-section side center>
