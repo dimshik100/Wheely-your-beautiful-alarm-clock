@@ -41,6 +41,7 @@
 <script>
 import AlarmList from '../components/AlarmList'
 import { Repeat } from '../classes/Repeat.js';
+import { Alarm } from '../classes/Alarm.js';
 
 export default {
   name: 'MainLayout',
@@ -53,36 +54,11 @@ export default {
       alarmDialog: false,
       currentAlarm: null,
       alarms: [
-        {
-          id: 1,
-          time: '13:30 PM',
-          active: true,
-          occurrence: new Repeat(new Date()) // once
-        },
-        {
-          id: 2,
-          time: '14:30 PM',
-          active: false,
-          occurrence: new Repeat([3]) // repeatOneDay (local days of the week)
-        },
-        {
-          id: 3,
-          time: '16:50 PM',
-          active: true,
-          occurrence: new Repeat([2, 5]) // repeatMultipleDays
-        },
-        {
-          id: 4,
-          time: '16:50 PM',
-          active: false,
-          occurrence: new Repeat([0, 1, 2, 3, 4]) // repeatWeekdays
-        },
-        {
-          id: 5,
-          time: '16:50 PM',
-          active: true,
-          occurrence: new Repeat([5, 6]) // repeatWeekend
-        }
+        new Alarm(1, 24, "PM", true, new Repeat(new Date())), // once
+        new Alarm(14, 30, "PM", true, new Repeat([3])), // repeatOneDay (local days of the week)
+        new Alarm(1, 24, "AM", true, new Repeat([2, 5])), // repeatMultipleDays
+        new Alarm(13, 24, "PM", true, new Repeat([0, 1, 2, 3, 4])), // repeatWeekdays
+        new Alarm(3, 50, "AM", true, new Repeat([5, 6])) // repeatWeekend
       ]
     }
   },

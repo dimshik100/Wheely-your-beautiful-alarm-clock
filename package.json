@@ -14,7 +14,8 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "date-fns": "^2.14.0",
-    "quasar": "^1.0.0"
+    "quasar": "^1.0.0",
+    "uniqid": "^5.2.0"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0",
