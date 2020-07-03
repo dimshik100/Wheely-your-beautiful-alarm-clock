@@ -56,16 +56,36 @@
 // it usess canvas :)
 
 import { getColorByTime } from '../utils';
+import { Alarm } from '../classes/Alarm';
+import { Repeat } from '../classes/Repeat';
 
 export default {
   name: "AlarmDialogCard",
+  props: {
+    alarm: {
+      type: Alarm,
+      required: false
+    }
+  },
   data () {
     return {
       hours: 1,
       minutes: 30,
-      period: 'AM', // AM | PM
-      alarm: { time: '123' }
+      period: 'AM' // AM | PM
       // gradientData: null // TODO: init with some data
+    }
+  },
+  created() {
+    // init
+    if (this.alarm) {
+      this.hours = this.alarm.hours;
+      this.minutes = this.alarm.minutes;
+      this.period = this.alarm.period;
+    } else {
+      // default alarm time
+      this.hours = 2;
+      this.minutes = 0;
+      this.period = 'PM';
     }
   },
   computed: {
@@ -84,7 +104,17 @@ export default {
   },
   methods: {
     submitAlarm() {
-      this.$emit('alarmSet', this.alarm);
+      // TODO: complete Repeat
+      const alarmConfig = { hours: this.hours, minutes: this.minutes, period: this.period, active: true, occurrence: new Repeat(new Date()) };
+
+      // Check if we are editing an existing alarm
+      if (this.alarm && this.alarm.id) {
+        alarmConfig.id = this.alarm.id;
+      }
+
+      const alarm = new Alarm(alarmConfig);
+
+      this.$emit('alarmSet', alarm);
     }
   }
 };
