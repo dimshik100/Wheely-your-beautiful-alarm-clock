@@ -47,11 +47,7 @@ export default {
       const weekdaysShortText = getWeekDays('iiiii'); // M, T, W, T, F, S, S
 
       for (let dayNumber = 0; dayNumber < 7; dayNumber++) {
-        if (repeatDays.includes(dayNumber)) {
-          html += `<strong>${weekdaysShortText[dayNumber]}</strong> `;
-        } else {
-          html += `<span class="day-of-the-week">${weekdaysShortText[dayNumber]} </span>`;
-        }
+        html += `<span class="day-of-the-week ${repeatDays.includes(dayNumber) ? 'selected-day' : ''}">${weekdaysShortText[dayNumber]} </span>`;
       }
 
       return html;
@@ -64,6 +60,10 @@ export default {
 ::v-deep {
   .day-of-the-week {
     opacity: 0.3;
+
+    &.selected-day {
+      opacity: 1;
+    }
   }
 }
 </style>
