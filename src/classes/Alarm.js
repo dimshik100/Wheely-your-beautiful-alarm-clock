@@ -1,13 +1,23 @@
-var uniqid = require('uniqid');
+const uniqId = require('uniqid');
+import { Repeat } from '../classes/Repeat.js';
 
+const DEFAULT_HOURS = 2;
+const DEFAULT_MINUTES = 30;
+const DEFAULT_PERIOD = 'PM';
 export class Alarm {
-  constructor(hours, minutes, period, active = false, occurrenceData) {
-    this.id = uniqid();
-    this.hours = hours;
-    this.minutes = minutes;
-    this.period = period;
-    this.active = active;
-    this.occurrence = occurrenceData;// type of Repeat
+  constructor(config) {
+    this.id = config.id ? config.id : uniqId();
+    this.hours = config.hours ? config.hours : DEFAULT_HOURS;
+    this.minutes = config.minutes ? config.minutes : DEFAULT_MINUTES;
+    this.period = config.period ? config.period : DEFAULT_PERIOD;
+    this.active = config.active !== undefined ? config.active : true;
+    this.occurrence = config.occurrence ? config.occurrence : new Repeat(new Date());
+  }
+
+  getDisplayTime() {
+    const hours = this.hours.toString().padStart(2, '0');
+    const minutes = this.minutes.toString().padStart(2, '0');
+    return `${hours}:${minutes} ${this.period}`;
   }
   // TODO:add a function that return the time in 24 hours format
 }
