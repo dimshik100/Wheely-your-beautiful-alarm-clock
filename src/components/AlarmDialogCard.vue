@@ -83,9 +83,9 @@ export default {
       this.period = this.alarm.period;
     } else {
       // default alarm time
-      this.hours = 2;
+      this.hours = 6;
       this.minutes = 0;
-      this.period = 'PM';
+      this.period = 'AM';
     }
   },
   computed: {
