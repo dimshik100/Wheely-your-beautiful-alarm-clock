@@ -20,67 +20,119 @@ export const getWeekDays = function(formatPattern = "iiiii") {
 export const getColorByTime = function(hours, minutes, period) {
   const gradientsArr = [
     {
-      fromTime: "00:00",
-      toTime: "04:00",
+      fromTime: {
+        hour: 12, // 1-12
+        minute: 0, // 0-59
+        period: "PM" // AM/PM
+      },
+      toTime: {
+        hour: 4, // 1-12
+        minute: 0, // 0-59
+        period: "AM" // AM/PM
+      },
       fromColor: "#4a75e5",
       toColor: "#3c1e84"
     },
     {
-      fromTime: "04:01",
-      toTime: "07:00",
+      fromTime: {
+        hour: 4, // 1-12
+        minute: 1, // 0-59
+        period: "AM" // AM/PM
+      },
+      toTime: {
+        hour: 7, // 1-12
+        minute: 0, // 0-59
+        period: "AM" // AM/PM
+      },
       fromColor: "#8c57e5",
       toColor: "#eb95b7"
     },
     {
-      fromTime: "07:01",
-      toTime: "10:00",
+      fromTime: {
+        hour: 7, // 1-12
+        minute: 1, // 0-59
+        period: "AM" // AM/PM
+      },
+      toTime: {
+        hour: 10, // 1-12
+        minute: 0, // 0-59
+        period: "AM" // AM/PM
+      },
       fromColor: "#5aaff9",
       toColor: "#f4a2d9"
     },
     {
-      fromTime: "10:01",
-      toTime: "14:00",
+      fromTime: {
+        hour: 10, // 1-12
+        minute: 1, // 0-59
+        period: "AM" // AM/PM
+      },
+      toTime: {
+        hour: 4, // 1-12
+        minute: 0, // 0-59
+        period: "PM" // AM/PM
+      },
       fromColor: "#8dfffd",
       toColor: "#1ea3ff"
     },
     {
-      fromTime: "04:01",
-      toTime: "17:00",
+      fromTime: {
+        hour: 4, // 1-12
+        minute: 1, // 0-59
+        period: "PM" // AM/PM
+      },
+      toTime: {
+        hour: 5, // 1-12
+        minute: 0, // 0-59
+        period: "PM" // AM/PM
+      },
       fromColor: "#fb97ab",
       toColor: "#f42f64"
     },
     {
-      fromTime: "17:01",
-      toTime: "20:00",
+      fromTime: {
+        hour: 5, // 1-12
+        minute: 1, // 0-59
+        period: "PM" // AM/PM
+      },
+      toTime: {
+        hour: 8, // 1-12
+        minute: 0, // 0-59
+        period: "PM" // AM/PM
+      },
       fromColor: "#8c57e5",
       toColor: "#eb95b7"
     },
     {
-      fromTime: "20:01",
-      toTime: "23:59",
+      fromTime: {
+        hour: 8, // 1-12
+        minute: 1, // 0-59
+        period: "PM" // AM/PM
+      },
+      toTime: {
+        hour: 11, // 1-12
+        minute: 59, // 0-59
+        period: "PM" // AM/PM
+      },
       fromColor: "#4a75e5",
       toColor: "#3c1e84"
     }
   ];
 
-  hours = parseInt(hours);
-
-  let hoursIn24Format = hours;
-
   if (period === "PM" && hours < 12) {
-    hoursIn24Format = hours + 12;
+    hours = hours + 12;
   }
   if (period === "AM" && hours === 12) {
-    hoursIn24Format = hours - 12;
+    hours = hours - 12;
   }
 
-  const minutesFromBeginningOfTheDay = getMinutesFromHourMinuteString(`${hoursIn24Format}:${minutes}`);
+  const minutesFromBeginningOfTheDay = getMinutesFromHourMinute(hours, minutes);
 
   let gradientData = gradientsArr[0]; // setting initial color
 
   for (const gradData of gradientsArr) {
-    const fromMinute = getMinutesFromHourMinuteString(gradData.fromTime);
-    const toMinute = getMinutesFromHourMinuteString(gradData.toTime);
+    const fromMinute = getMinutesFromHourMinute(gradData.fromTime.hour, gradData.fromTime.minute);
+    const toMinute = getMinutesFromHourMinute(gradData.toTime.hour, gradData.toTime.minute);
     if (minutesFromBeginningOfTheDay >= fromMinute && minutesFromBeginningOfTheDay <= toMinute) {
       gradientData = gradData;
       break;
@@ -90,8 +142,6 @@ export const getColorByTime = function(hours, minutes, period) {
   return gradientData;
 };
 
-export const getMinutesFromHourMinuteString = function(hmStr) {
-  const parts = hmStr.split(':'); // split it at the colons
-  const minutesFromBeginningOfTheDay = (+parts[0]) * 60 + (+parts[1]);
-  return minutesFromBeginningOfTheDay;
+export const getMinutesFromHourMinute = function(hours, minutes) {
+  return hours * 60 + minutes;
 }
