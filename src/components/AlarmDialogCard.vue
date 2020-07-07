@@ -34,7 +34,18 @@
       v-model="period"
       size="100px"
       />
+      <div class="q-pa-md">
+        <div class="q-gutter-sm">
+          <q-checkbox class="days-btn" v-model="selection" val="sun" label="sun" />
+          <q-checkbox v-model="selection" val="mon" label="mon" color="orange" />
+          <q-checkbox v-model="selection" val="tue" label="tue" color="red" />
+          <q-checkbox v-model="selection" val="wed" label="wed" color="cyan" />
+          <q-checkbox v-model="selection" val="thu" label="thu" color="cyan" />
+          <q-checkbox v-model="selection" val="fri" label="fri" color="cyan" />
+          <q-checkbox v-model="selection" val="sat" label="sat" color="cyan" />
 
+        </div>
+      </div>
       <q-btn class="close-btn" :size="'md'" round icon="close" v-close-popup>
         <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
       </q-btn>
@@ -71,8 +82,9 @@ export default {
     return {
       hours: 1,
       minutes: 30,
-      period: 'AM' // AM | PM
+      period: 'AM', // AM | PM
       // gradientData: null // TODO: init with some data
+      selection: ['teal', 'red']
     }
   },
   created() {
@@ -134,7 +146,12 @@ export default {
   background-color: rgba(0, 0, 0, 0.15);
   color: $white;
 }
-
+.days-btn{
+  width: 43px;
+  height: 43px;
+  // background-color: rgba(0, 0, 0, 0.18);
+  border-radius: 50%;
+}
 .submit-btn {
   position: absolute;
   bottom: -20px;
