@@ -34,16 +34,24 @@
       v-model="period"
       size="100px"
       />
-      <div class="q-pa-md">
-        <div class="q-gutter-sm">
-          <q-checkbox class="days-btn" v-model="selection" val="sun" label="sun" />
-          <q-checkbox v-model="selection" val="mon" label="mon" color="orange" />
-          <q-checkbox v-model="selection" val="tue" label="tue" color="red" />
-          <q-checkbox v-model="selection" val="wed" label="wed" color="cyan" />
-          <q-checkbox v-model="selection" val="thu" label="thu" color="cyan" />
-          <q-checkbox v-model="selection" val="fri" label="fri" color="cyan" />
-          <q-checkbox v-model="selection" val="sat" label="sat" color="cyan" />
-
+      <div class="container">
+        <div>
+          <input type="checkbox" id="check_1" name="check_1" value="check_1">
+          <label for="check_1">sun</label>
+          <input type="checkbox" id="check_2" name="check_2" value="check_2">
+          <label for="check_2">mon</label>
+          <input type="checkbox" id="check_3" name="check_3" value="check_3">
+          <label for="check_3">tue</label>
+          <input type="checkbox" id="check_4" name="check_4" value="check_4">
+          <label for="check_4">wed</label>
+          <input type="checkbox" id="check_5" name="check_5" value="check_5">
+          <label for="check_5">thu</label>
+        </div>
+        <div>
+          <input type="checkbox" id="check_6" name="check_6" value="check_6">
+          <label for="check_6">fri</label>
+          <input type="checkbox" id="check_7" name="check_7" value="check_7">
+          <label for="check_7">sat</label>
         </div>
       </div>
       <q-btn class="close-btn" :size="'md'" round icon="close" v-close-popup>
@@ -123,9 +131,7 @@ export default {
       if (this.alarm && this.alarm.id) {
         alarmConfig.id = this.alarm.id;
       }
-
       const alarm = new Alarm(alarmConfig);
-
       this.$emit('alarmSet', alarm);
     }
   }
@@ -149,7 +155,9 @@ export default {
 .days-btn{
   width: 43px;
   height: 43px;
-  // background-color: rgba(0, 0, 0, 0.18);
+  display: inline-block;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.18);
   border-radius: 50%;
 }
 .submit-btn {
@@ -171,4 +179,34 @@ export default {
   letter-spacing: 1.25px;
   color: $white;
 }
-</style>
+.container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+input[type="checkbox"]:not(:checked),input[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999%;
+}
+
+input[type="checkbox"] + label {
+  display: inline-block;
+  padding-top: 15px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.18);
+  color: white;
+  margin-bottom: 10px;
+  margin-right: 50px;
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:checked + label {
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  color: #606060;
+}
+  </style>
