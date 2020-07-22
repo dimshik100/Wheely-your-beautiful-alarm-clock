@@ -1,9 +1,9 @@
 const uniqId = require('uniqid');
 import { Repeat } from '../classes/Repeat.js';
 
-const DEFAULT_HOURS = 2;
-const DEFAULT_MINUTES = 0;
-const DEFAULT_PERIOD = 'AM';
+export const DEFAULT_HOURS = 6;
+export const DEFAULT_MINUTES = 0;
+export const DEFAULT_PERIOD = 'AM';
 export class Alarm {
   constructor(config) {
     this.id = config.id ? config.id : uniqId();

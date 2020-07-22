@@ -75,7 +75,7 @@
 // it usess canvas :)
 
 import { getColorByTime } from '../utils';
-import { Alarm } from '../classes/Alarm';
+import { Alarm, DEFAULT_HOURS, DEFAULT_MINUTES, DEFAULT_PERIOD } from '../classes/Alarm';
 import { Repeat } from '../classes/Repeat';
 
 export default {
@@ -103,9 +103,9 @@ export default {
       this.period = this.alarm.period;
     } else {
       // default alarm time
-      this.hours = 6;
-      this.minutes = 0;
-      this.period = 'AM';
+      this.hours = DEFAULT_HOURS;
+      this.minutes = DEFAULT_MINUTES;
+      this.period = DEFAULT_PERIOD;
     }
   },
   computed: {
