@@ -35,24 +35,20 @@
       size="100px"
       />
       <div class="container">
-        <div>
-          <input type="checkbox" id="check_1" name="check_1" value="check_1">
-          <label for="check_1">sun</label>
-          <input type="checkbox" id="check_2" name="check_2" value="check_2">
-          <label for="check_2">mon</label>
-          <input type="checkbox" id="check_3" name="check_3" value="check_3">
-          <label for="check_3">tue</label>
-          <input type="checkbox" id="check_4" name="check_4" value="check_4">
-          <label for="check_4">wed</label>
-          <input type="checkbox" id="check_5" name="check_5" value="check_5">
-          <label for="check_5">thu</label>
-        </div>
-        <div>
-          <input type="checkbox" id="check_6" name="check_6" value="check_6">
-          <label for="check_6">fri</label>
-          <input type="checkbox" id="check_7" name="check_7" value="check_7">
-          <label for="check_7">sat</label>
-        </div>
+        <input type="checkbox" id="check_1" class="checkbox" value="check_1" onclick="add_checked_day(this)">
+        <label for="check_1">sun</label>
+        <input type="checkbox" id="check_2" class="checkbox" value="check_2">
+        <label for="check_2">mon</label>
+        <input type="checkbox" id="check_3" class="checkbox" value="check_3">
+        <label for="check_3">tue</label>
+        <input type="checkbox" id="check_4" class="checkbox" value="check_4">
+        <label for="check_4">wed</label>
+        <input type="checkbox" id="check_5" class="checkbox" value="check_5">
+        <label for="check_5">thu</label>
+        <input type="checkbox" id="check_6" class="checkbox" value="check_6">
+        <label for="check_6">fri</label>
+        <input type="checkbox" id="check_7" class="checkbox" value="check_7">
+        <label for="check_7">sat</label>
       </div>
       <q-btn class="close-btn" :size="'md'" round icon="close" v-close-popup>
         <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
@@ -186,12 +182,12 @@ export default {
   text-align: center;
 }
 
-input[type="checkbox"]:not(:checked),input[type="checkbox"]:checked {
+.checkbox {
   position: absolute;
   left: -9999%;
 }
 
-input[type="checkbox"] + label {
+.checkbox + label {
   display: inline-block;
   padding-top: 15px;
   cursor: pointer;
@@ -204,7 +200,7 @@ input[type="checkbox"] + label {
   border-radius: 50%;
 }
 
-input[type="checkbox"]:checked + label {
+.checkbox:checked + label {
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
   color: #606060;
