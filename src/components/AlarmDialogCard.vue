@@ -33,34 +33,19 @@
       true-value="AM"
       v-model="period"
       size="100px"
-      />
-      <div class="container">
-        <input type="checkbox" id="check_1" class="checkbox" value="check_1" onclick="add_checked_day(this)">
-        <label for="check_1">sun</label>
-        <input type="checkbox" id="check_2" class="checkbox" value="check_2">
-        <label for="check_2">mon</label>
-        <input type="checkbox" id="check_3" class="checkbox" value="check_3">
-        <label for="check_3">tue</label>
-        <input type="checkbox" id="check_4" class="checkbox" value="check_4">
-        <label for="check_4">wed</label>
-        <input type="checkbox" id="check_5" class="checkbox" value="check_5">
-        <label for="check_5">thu</label>
-        <input type="checkbox" id="check_6" class="checkbox" value="check_6">
-        <label for="check_6">fri</label>
-        <input type="checkbox" id="check_7" class="checkbox" value="check_7">
-        <label for="check_7">sat</label>
-      </div>
-      <q-btn class="close-btn" :size="'md'" round icon="close" v-close-popup>
-        <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
-      </q-btn>
+  />
+  <DaysList v-on:childToParent="onChildClick"/>
+  <q-btn class="close-btn" :size="'md'" round icon="close" v-close-popup>
+    <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
+  </q-btn>
 
-      <q-btn class="close-btn" round icon="close" v-close-popup>
-        <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
-      </q-btn>
+  <q-btn class="close-btn" round icon="close" v-close-popup>
+    <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
+  </q-btn>
 
-      <q-btn class="submit-btn" round :label="'OK'" v-close-popup @click="submitAlarm">
-        <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
-      </q-btn>
+  <q-btn class="submit-btn" round :label="'OK'" v-close-popup @click="submitAlarm">
+    <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
+  </q-btn>
 
   </q-card>
 </template>
@@ -73,6 +58,7 @@
 import { getColorByTime } from '../utils';
 import { Alarm, DEFAULT_HOURS, DEFAULT_MINUTES, DEFAULT_PERIOD } from '../classes/Alarm';
 import { Repeat } from '../classes/Repeat';
+import DaysList from './DaysList'
 
 export default {
   name: "AlarmDialogCard",
@@ -82,17 +68,19 @@ export default {
       required: false
     }
   },
+  components: {
+    DaysList
+  },
   data () {
     return {
       hours: 1,
       minutes: 30,
       period: 'AM', // AM | PM
       // gradientData: null // TODO: init with some data
-      selection: ['teal', 'red']
+      selectedDays: []
     }
   },
   created() {
-    // init
     if (this.alarm) {
       this.hours = this.alarm.hours;
       this.minutes = this.alarm.minutes;
@@ -121,7 +109,7 @@ export default {
   methods: {
     submitAlarm() {
       // TODO: complete Repeat
-      const alarmConfig = { hours: this.hours, minutes: this.minutes, period: this.period, active: true, occurrence: new Repeat(new Date()) };
+      const alarmConfig = { hours: this.hours, minutes: this.minutes, period: this.period, active: true, occurrence: new Repeat(this.selectedDays) };
 
       // Check if we are editing an existing alarm
       if (this.alarm && this.alarm.id) {
@@ -129,6 +117,10 @@ export default {
       }
       const alarm = new Alarm(alarmConfig);
       this.$emit('alarmSet', alarm);
+    },
+    onChildClick (days) {
+      this.selectedDays = days;
+      console.log("this.selectedDays" + this.selectedDays);
     }
   }
 };
@@ -147,14 +139,6 @@ export default {
   border: solid 1px rgba(0, 0, 0, 0.19);
   background-color: rgba(0, 0, 0, 0.15);
   color: $white;
-}
-.days-btn{
-  width: 43px;
-  height: 43px;
-  display: inline-block;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.18);
-  border-radius: 50%;
 }
 .submit-btn {
   position: absolute;
@@ -175,34 +159,4 @@ export default {
   letter-spacing: 1.25px;
   color: $white;
 }
-.container{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-}
-
-.checkbox {
-  position: absolute;
-  left: -9999%;
-}
-
-.checkbox + label {
-  display: inline-block;
-  padding-top: 15px;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  background-color: rgba(0, 0, 0, 0.18);
-  color: white;
-  margin-bottom: 10px;
-  margin-right: 50px;
-  border-radius: 50%;
-}
-
-.checkbox:checked + label {
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.16);
-  background-color: #ffffff;
-  color: #606060;
-}
-  </style>
+</style>

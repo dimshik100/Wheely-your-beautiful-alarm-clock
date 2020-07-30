@@ -18,7 +18,6 @@ export const getWeekDays = function(formatPattern = "iiiii") {
 };
 
 export const getColorByTime = function(hours, minutes, period) {
-  debugger;
   const gradientsArr = [
     {
       fromTime: {

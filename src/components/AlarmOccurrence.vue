@@ -17,13 +17,13 @@ export default {
   },
   computed: {
     occurrence() {
+      debugger;
       // If we get a specific date, this means that we want to play the alarm only once
       if (this.repeat.date) {
         return `Once (${format(this.repeat.date, 'dd/MM/yyyy')})`;
       }
 
       const repeatDays = this.repeat.days;
-
       // If we have only one day in the repeat days array, The full name of the day should be presented
       if (repeatDays.length === 1) {
         const weekdaysLongText = getWeekDays('iiii'); // Monday, Tuesday, ..., Sunday
