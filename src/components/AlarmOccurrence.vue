@@ -17,6 +17,7 @@ export default {
   },
   computed: {
     occurrence() {
+      
       // If we get a specific date, this means that we want to play the alarm only once
       if (this.repeat.date) {
         return `Once (${format(this.repeat.date, 'dd/MM/yyyy')})`;
