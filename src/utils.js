@@ -20,78 +20,138 @@ export const getWeekDays = function(formatPattern = "iiiii") {
 export const getColorByTime = function(hours, minutes, period) {
   const gradientsArr = [
     {
-      fromTime: "00:00",
-      toTime: "04:00",
-      fromColor: "#4a75e5",
-      toColor: "#3c1e84"
+      fromTime: {
+        hour: 0, // 1-12
+        minute: 0, // 0-59
+        period: "AM" // AM/PM
+      },
+      toTime: {
+        hour: 4, // 1-12
+        minute: 0, // 0-59
+        period: "AM" // AM/PM
+      },
+      fromColor: "#7934f3",
+      toColor: "#6ea2f1"
     },
     {
-      fromTime: "04:01",
-      toTime: "07:00",
-      fromColor: "#8c57e5",
-      toColor: "#eb95b7"
-    },
-    {
-      fromTime: "07:01",
-      toTime: "10:00",
+      fromTime: {
+        hour: 4, // 1-12
+        minute: 1, // 0-59
+        period: "AM" // AM/PM
+      },
+      toTime: {
+        hour: 7, // 1-12
+        minute: 0, // 0-59
+        period: "AM" // AM/PM
+      },
       fromColor: "#5aaff9",
       toColor: "#f4a2d9"
     },
     {
-      fromTime: "10:01",
-      toTime: "14:00",
+      fromTime: {
+        hour: 7, // 1-12
+        minute: 1, // 0-59
+        period: "AM" // AM/PM
+      },
+      toTime: {
+        hour: 10, // 1-12
+        minute: 0, // 0-59
+        period: "AM" // AM/PM
+      },
       fromColor: "#8dfffd",
       toColor: "#1ea3ff"
     },
     {
-      fromTime: "04:01",
-      toTime: "17:00",
+      fromTime: {
+        hour: 10, // 1-12
+        minute: 1, // 0-59
+        period: "AM" // AM/PM
+      },
+      toTime: {
+        hour: 2, // 1-12
+        minute: 0, // 0-59
+        period: "PM" // AM/PM
+      },
+      fromColor: "#ffe4a8",
+      toColor: "#ff586e"
+    },
+    {
+      fromTime: {
+        hour: 2, // 1-12
+        minute: 1, // 0-59
+        period: "PM" // AM/PM
+      },
+      toTime: {
+        hour: 5, // 1-12
+        minute: 0, // 0-59
+        period: "PM" // AM/PM
+      },
       fromColor: "#fb97ab",
       toColor: "#f42f64"
     },
     {
-      fromTime: "17:01",
-      toTime: "20:00",
+      fromTime: {
+        hour: 5, // 1-12
+        minute: 1, // 0-59
+        period: "PM" // AM/PM
+      },
+      toTime: {
+        hour: 8, // 1-12
+        minute: 0, // 0-59
+        period: "PM" // AM/PM
+      },
       fromColor: "#8c57e5",
       toColor: "#eb95b7"
     },
     {
-      fromTime: "20:01",
-      toTime: "23:59",
+      fromTime: {
+        hour: 8, // 1-12
+        minute: 1, // 0-59
+        period: "PM" // AM/PM
+      },
+      toTime: {
+        hour: 11, // 1-12
+        minute: 59, // 0-59
+        period: "PM" // AM/PM
+      },
       fromColor: "#4a75e5",
       toColor: "#3c1e84"
     }
   ];
 
-  hours = parseInt(hours);
-
-  let hoursIn24Format = hours;
-
-  if (period === "PM" && hours < 12) {
-    hoursIn24Format = hours + 12;
-  }
+  // if (period === "PM" && hours < 12) {
+  //   console.log("PM");
+  //   hours = hours + 12;
+  // }
   if (period === "AM" && hours === 12) {
-    hoursIn24Format = hours - 12;
+    console.log("AM");
+    hours = hours - 12;
   }
 
-  const minutesFromBeginningOfTheDay = getMinutesFromHourMinuteString(`${hoursIn24Format}:${minutes}`);
-
+  const minutesFromBeginningOfTheDay = getMinutesFromHourMinute(hours, minutes, period);
+  console.log("minutesFromBeginningOfTheDay" + minutesFromBeginningOfTheDay);
   let gradientData = gradientsArr[0]; // setting initial color
 
   for (const gradData of gradientsArr) {
-    const fromMinute = getMinutesFromHourMinuteString(gradData.fromTime);
-    const toMinute = getMinutesFromHourMinuteString(gradData.toTime);
+    const fromMinute = getMinutesFromHourMinute(gradData.fromTime.hour, gradData.fromTime.minute, gradData.fromTime.period);
+    console.log("fromMinute" + fromMinute);
+    const toMinute = getMinutesFromHourMinute(gradData.toTime.hour, gradData.toTime.minute, gradData.toTime.period);
+    console.log("toMinute" + toMinute);
     if (minutesFromBeginningOfTheDay >= fromMinute && minutesFromBeginningOfTheDay <= toMinute) {
       gradientData = gradData;
       break;
     }
   }
+  console.log("-----------");
   console.log(gradientData);
   return gradientData;
 };
 
-export const getMinutesFromHourMinuteString = function(hmStr) {
-  const parts = hmStr.split(':'); // split it at the colons
-  const minutesFromBeginningOfTheDay = (+parts[0]) * 60 + (+parts[1]);
-  return minutesFromBeginningOfTheDay;
+export const getMinutesFromHourMinute = function(hours, minutes, period) {
+  if (period === "AM" || hours === 12) {
+    return hours * 60 + minutes;
+  } else { // "PM"
+    hours = hours + 12;
+    return hours * 60 + minutes;
+  }
 }

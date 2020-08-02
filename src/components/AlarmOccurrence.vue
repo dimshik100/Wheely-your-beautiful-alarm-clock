@@ -23,7 +23,6 @@ export default {
       }
 
       const repeatDays = this.repeat.days;
-
       // If we have only one day in the repeat days array, The full name of the day should be presented
       if (repeatDays.length === 1) {
         const weekdaysLongText = getWeekDays('iiii'); // Monday, Tuesday, ..., Sunday

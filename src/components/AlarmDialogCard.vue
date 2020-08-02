@@ -33,19 +33,19 @@
       true-value="AM"
       v-model="period"
       size="100px"
-      />
+  />
+  <DaysList v-on:childToParent="onChildClick"/>
+  <q-btn class="close-btn" :size="'md'" round icon="close" v-close-popup>
+    <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
+  </q-btn>
 
-      <q-btn class="close-btn" :size="'md'" round icon="close" v-close-popup>
-        <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
-      </q-btn>
+  <q-btn class="close-btn" round icon="close" v-close-popup>
+    <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
+  </q-btn>
 
-      <q-btn class="close-btn" round icon="close" v-close-popup>
-        <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
-      </q-btn>
-
-      <q-btn class="submit-btn" round :label="'OK'" v-close-popup @click="submitAlarm">
-        <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
-      </q-btn>
+  <q-btn class="submit-btn" round :label="'OK'" v-close-popup @click="submitAlarm">
+    <!-- <q-tooltip content-class="bg-red text-primary">Close</q-tooltip> -->
+  </q-btn>
 
   </q-card>
 </template>
@@ -56,8 +56,9 @@
 // it usess canvas :)
 
 import { getColorByTime } from '../utils';
-import { Alarm } from '../classes/Alarm';
+import { Alarm, DEFAULT_HOURS, DEFAULT_MINUTES, DEFAULT_PERIOD } from '../classes/Alarm';
 import { Repeat } from '../classes/Repeat';
+import DaysList from './DaysList'
 
 export default {
   name: "AlarmDialogCard",
@@ -67,25 +68,28 @@ export default {
       required: false
     }
   },
+  components: {
+    DaysList
+  },
   data () {
     return {
       hours: 1,
       minutes: 30,
-      period: 'AM' // AM | PM
+      period: 'AM', // AM | PM
       // gradientData: null // TODO: init with some data
+      selectedDays: []
     }
   },
   created() {
-    // init
     if (this.alarm) {
       this.hours = this.alarm.hours;
       this.minutes = this.alarm.minutes;
       this.period = this.alarm.period;
     } else {
       // default alarm time
-      this.hours = 2;
-      this.minutes = 0;
-      this.period = 'PM';
+      this.hours = DEFAULT_HOURS;
+      this.minutes = DEFAULT_MINUTES;
+      this.period = DEFAULT_PERIOD;
     }
   },
   computed: {
@@ -105,16 +109,18 @@ export default {
   methods: {
     submitAlarm() {
       // TODO: complete Repeat
-      const alarmConfig = { hours: this.hours, minutes: this.minutes, period: this.period, active: true, occurrence: new Repeat(new Date()) };
+      const alarmConfig = { hours: this.hours, minutes: this.minutes, period: this.period, active: true, occurrence: new Repeat(this.selectedDays) };
 
       // Check if we are editing an existing alarm
       if (this.alarm && this.alarm.id) {
         alarmConfig.id = this.alarm.id;
       }
-
       const alarm = new Alarm(alarmConfig);
-
       this.$emit('alarmSet', alarm);
+    },
+    onChildClick (days) {
+      this.selectedDays = days;
+      console.log("this.selectedDays" + this.selectedDays);
     }
   }
 };
@@ -134,7 +140,6 @@ export default {
   background-color: rgba(0, 0, 0, 0.15);
   color: $white;
 }
-
 .submit-btn {
   position: absolute;
   bottom: -20px;
